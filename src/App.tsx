@@ -1,6 +1,6 @@
 import { useState } from "react";
 import data from "./data/data.json";
-import type { CartItem } from "./types/interfaces.ts";
+import type { Item, CartItem } from "./types/interfaces.ts";
 import Dessert from "./components/Dessert";
 import Cart from "./components/Cart";
 import Modal from "./components/Modal.tsx";
@@ -11,29 +11,25 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddToCart = (
-    id: number,
-    name: string,
-    desc: string,
-    price: number,
-    img: string,
+    item: Item
   ) => {
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === id);
+      const existingItem = prevItems.find((prevItem) => prevItem.id === item.id);
 
       if (existingItem) {
-        return prevItems.map((item) =>
-          item.id === id ? { ...item, qty: item.qty + 1 } : item,
+        return prevItems.map((prevItem) =>
+          prevItem.id === item.id ? { ...prevItem, qty: prevItem.qty + 1 } : prevItem,
         );
       }
 
       return [
         ...prevItems,
         {
-          id,
-          name,
-          description: desc,
-          price,
-          imgUrl: img,
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          imgUrl: item.imgUrl,
           qty: 1,
         },
       ];
@@ -73,11 +69,7 @@ function App() {
               qty={cartItems.find((item) => item.id === dessert.id)?.qty ?? 0}
               handleAddToCart={() =>
                 handleAddToCart(
-                  dessert.id,
-                  dessert.name,
-                  dessert.description,
-                  dessert.price,
-                  dessert.imgUrl,
+                  dessert
                 )
               }
               handleRemoveItem={handleRemoveItem}
