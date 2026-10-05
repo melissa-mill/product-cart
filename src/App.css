@@ -1,0 +1,53 @@
+.desserts {
+  flex: 1;
+  min-width: 0;
+  color: var(--dark-gray);
+}
+
+.desserts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+}
+
+.btn {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  padding: 8px;
+  font-family: "Sansation", sans-serif;
+  background-color: chocolate;
+  color: white;
+  line-height: 18px;
+  border: 0;
+  border-radius: 50px;
+  border: 1px solid;
+}
+
+.btn-cart {
+  width: 18px;
+  height: 18px;
+  vertical-align: text-bottom;
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+p {
+  width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 1032px) {
+  .desserts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 425px) {
+  .desserts-grid {
+    grid-template-columns: 1fr;
+  }
+}

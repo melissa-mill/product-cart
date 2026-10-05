@@ -1,0 +1,33 @@
+:root {
+  --gray: #949c9c;
+  --light-gray: #d8d8d8;
+  --dark-gray: #4d3c07;
+}
+
+#root {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body {
+  margin: 20px;
+  font-family: "Sansation", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  background-color: linen;
+}
+
+@media (max-width: 768px) {
+  #root {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 425px) {
+  body {
+    width: 90%;
+  }
+}
