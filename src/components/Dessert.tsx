@@ -1,3 +1,5 @@
+import "../styles/Dessert.css";
+import { CircleMinus, CirclePlus, ShoppingCartPlus } from "lucide-react";
 import type { Item } from "../types/interfaces.ts";
 
 interface DessertProps extends Item {
@@ -24,47 +26,57 @@ function Dessert({
   decreaseCartItem,
 }: DessertProps) {
   return (
-    <div>
-      <div>
-        <img src={imgUrl} alt={`Image of ${name}`} width={250} loading="lazy" />
+    <div className="dessert">
+      <div className={`dessert__img-container ${qty ? "item__in-cart" : ""}`}>
+        <img
+          className="dessert__img"
+          src={imgUrl}
+          alt={`Image of ${name}`}
+          width={230}
+          loading="lazy"
+        />
       </div>
       {qty ? (
-        <div>
+        <span className="btn btn__add-to-cart">
           {qty === 1 ? (
             <button
+              className="btn-cart"
               aria-label={`Remove ${name}`}
               onClick={() => handleRemoveItem(id)}
             >
-              -
+              <CircleMinus size={18} color="#fff" />
             </button>
           ) : (
             <button
+              className="btn-cart"
               aria-label={`Decrease ${name}`}
               onClick={() => decreaseCartItem(id)}
             >
-              -
+              <CircleMinus size={18} color="#fff" />
             </button>
           )}
           <span>{qty}</span>
           <button
+            className="btn-cart"
             aria-label={`Add to cart ${name}`}
             onClick={() => handleAddToCart(name, description, price, imgUrl)}
           >
-            +
+            <CirclePlus size={18} color="#fff" />
           </button>
-        </div>
+        </span>
       ) : (
         <button
+          className="btn btn__add-to-cart btn-add"
           aria-label={`Add to cart ${name}`}
           onClick={() => handleAddToCart(name, description, price, imgUrl)}
         >
-          Add to cart
+          <ShoppingCartPlus size={18} color="#d2691e" /> Add to cart
         </button>
       )}
 
-      <p>{name}</p>
-      <p>{description}</p>
-      <p>${price.toFixed(2)}</p>
+      <p className="item-title">{name}</p>
+      <p className="item-description">{description}</p>
+      <p className="item-price">${price.toFixed(2)}</p>
     </div>
   );
 }

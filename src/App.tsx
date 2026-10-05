@@ -4,6 +4,7 @@ import type { CartItem } from "./types/interfaces.ts";
 import Dessert from "./components/Dessert";
 import Cart from "./components/Cart";
 import Modal from "./components/Modal.tsx";
+import "./App.css";
 
 function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -60,36 +61,44 @@ function App() {
 
   return (
     <>
-      <h1>Desserts</h1>
-      {dessertsData.map((dessert) => (
-        <Dessert
-          key={dessert.id}
-          id={dessert.id}
-          name={dessert.name}
-          description={dessert.description}
-          price={dessert.price}
-          imgUrl={dessert.imgUrl}
-          qty={cartItems.find((item) => item.id === dessert.id)?.qty ?? 0}
-          handleAddToCart={() =>
-            handleAddToCart(
-              dessert.id,
-              dessert.name,
-              dessert.description,
-              dessert.price,
-              dessert.imgUrl,
-            )
-          }
-          handleRemoveItem={handleRemoveItem}
-          decreaseCartItem={decreaseCartItem}
-        />
-      ))}
+      <div className="desserts">
+        <h1>Desserts</h1>
+        <div className="desserts-grid">
+          {dessertsData.map((dessert) => (
+            <Dessert
+              key={dessert.id}
+              id={dessert.id}
+              name={dessert.name}
+              description={dessert.description}
+              price={dessert.price}
+              imgUrl={dessert.imgUrl}
+              qty={cartItems.find((item) => item.id === dessert.id)?.qty ?? 0}
+              handleAddToCart={() =>
+                handleAddToCart(
+                  dessert.id,
+                  dessert.name,
+                  dessert.description,
+                  dessert.price,
+                  dessert.imgUrl,
+                )
+              }
+              handleRemoveItem={handleRemoveItem}
+              decreaseCartItem={decreaseCartItem}
+            />
+          ))}
+        </div>
+      </div>
       <Cart
         items={cartItems}
         handleConfirmOrder={() => setModalVisibility(true)}
         handleRemoveItem={handleRemoveItem}
       />
       {modalVisibility && (
-        <Modal items={cartItems} onClose={() => setModalVisibility(false)} handleClick={handleNewOrder} />
+        <Modal
+          items={cartItems}
+          onClose={() => setModalVisibility(false)}
+          handleClick={handleNewOrder}
+        />
       )}
     </>
   );

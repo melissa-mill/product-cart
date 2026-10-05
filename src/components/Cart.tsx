@@ -1,3 +1,5 @@
+import "../styles/Cart.css";
+import { CakeSlice, CircleX } from "lucide-react";
 import type { CartItem } from "../types/interfaces.ts";
 
 interface CartProps {
@@ -14,34 +16,47 @@ function Cart({ items, handleConfirmOrder, handleRemoveItem }: CartProps) {
   );
 
   return (
-    <div>
-      <h3>Your cart ({totalItems})</h3>
+    <div className="cart">
+      <h3 className="cart__title">Your cart ({totalItems})</h3>
       {items.length > 0 ? (
-        <div>
+        <div className="cart__content">
           {items.map((item) => (
-            <div key={item.id}>
-              <span>{item.name}</span>
-              <span>{item.qty}x</span>
-              <span>
-                @ ${item.price.toFixed(2)} ${(item.price * item.qty).toFixed(2)}
-              </span>
+            <div key={item.id} className="cart-item">
+              <div >
+                <p className="cart-item__description">{item.description}</p>
+                <p className="cart-item__price">
+                  <span className="cart-item__qty">{item.qty}x</span>
+                  <span>@ ${item.price.toFixed(2)}</span>
+                  <span className="cart-item__total-price">${(item.price * item.qty).toFixed(2)}</span>
+                </p>
+              </div>
               <button
+                className="btn-cart btn__remove"
                 aria-label={`Remove ${item.name}`}
                 onClick={() => handleRemoveItem(item.id)}
               >
-                x
+                <CircleX size={18} color="#949c9c" />
               </button>
             </div>
           ))}
           <div>
-            Total ${cartTotal.toFixed(2)}
-            <button aria-label="Confirm order" onClick={handleConfirmOrder}>
+            <p className="cart__total">
+              Order Total <span className="cart__total-price">${cartTotal.toFixed(2)}</span>
+            </p>
+            <button
+              className="btn btn-cart__confirm-order"
+              aria-label="Confirm order"
+              onClick={handleConfirmOrder}
+            >
               Confirm order
             </button>
           </div>
         </div>
       ) : (
-        <div>Your added items will appear here</div>
+        <div className="cart__content cart__empty">
+          <CakeSlice size={72} color="#d2691e" />
+          <p>Your added items will appear here</p>
+        </div>
       )}
     </div>
   );
