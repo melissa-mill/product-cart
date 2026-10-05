@@ -8,9 +8,7 @@ import "./App.css";
 
 function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [modalVisibility, setModalVisibility] = useState(false);
-
-  const dessertsData = data.desserts;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddToCart = (
     id: number,
@@ -55,7 +53,7 @@ function App() {
   };
 
   const handleNewOrder = () => {
-    setModalVisibility(false);
+    setIsModalOpen(false);
     setCartItems([]);
   };
 
@@ -64,7 +62,7 @@ function App() {
       <div className="desserts">
         <h1>Desserts</h1>
         <div className="desserts-grid">
-          {dessertsData.map((dessert) => (
+          {data.desserts.map((dessert) => (
             <Dessert
               key={dessert.id}
               id={dessert.id}
@@ -90,13 +88,13 @@ function App() {
       </div>
       <Cart
         items={cartItems}
-        handleConfirmOrder={() => setModalVisibility(true)}
+        handleConfirmOrder={() => setIsModalOpen(true)}
         handleRemoveItem={handleRemoveItem}
       />
-      {modalVisibility && (
+      {isModalOpen && (
         <Modal
           items={cartItems}
-          onClose={() => setModalVisibility(false)}
+          onClose={() => setIsModalOpen(false)}
           handleClick={handleNewOrder}
         />
       )}
