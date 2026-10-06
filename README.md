@@ -1,6 +1,8 @@
 # Product List with Cart
 A responsive e-commerce product listing application built with React and TypeScript. Users can browse available desserts, add products to their cart, update quantities, remove items, and confirm their order.
 
+[Demo](https://melissa-mill.github.io/product-cart/)
+
 ## Features
 - Responsive layout for desktop and mobile devices
 - Display a list of dessert products
