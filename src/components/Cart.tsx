@@ -32,7 +32,7 @@ function Cart({ items, handleConfirmOrder, handleRemoveItem }: CartProps) {
               </div>
               <button
                 className="btn-cart btn__remove"
-                aria-label={`Remove ${item.name}`}
+                aria-label={`Remove ${item.name} from cart`}
                 onClick={() => handleRemoveItem(item.id)}
               >
                 <CircleX size={18} color="#949c9c" />
